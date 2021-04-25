@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "allowJs": true
+  },
+  "include": [
+    "scripts/*.js"
+  ]
+}

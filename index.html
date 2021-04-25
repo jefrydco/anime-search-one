@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Search</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="flex flex-wrap mb-3">
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="keyword" class="block mb-2">
+        Keyword
+      </label>
+      <input id="keyword" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+      <p id="keyword-info" class="mt-2 text-red-600 hidden">Keyword length must be longer than 3 characters</p>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="size" class="block mb-2">
+        Size
+      </label>
+      <select id="size" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="sort" class="block mb-2">
+        Sort
+      </label>
+      <select id="sort" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+        <option value="asc">ASC</option>
+        <option value="desc">DESC</option>
+      </select>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="sortby" class="block mb-2">
+        Sort By
+      </label>
+      <select id="sortby" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+      </select>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="duration" class="block mb-2">
+        Duration
+      </label>
+      <select id="duration" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+      </select>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="genres" class="block mb-2">
+        Genres
+      </label>
+      <select id="genres" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+      </select>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="licensors" class="block mb-2">
+        Licensors
+      </label>
+      <select id="licensors" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+      </select>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="producers" class="block mb-2">
+        Producers
+      </label>
+      <select id="producers" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+      </select>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="rating" class="block mb-2">
+        Rating
+      </label>
+      <select id="rating" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+      </select>
+    </div>
+    <div class="p-3 bg-blue-100 w-min m-3 rounded shadow form-box">
+      <label for="type" class="block mb-2">
+        Type
+      </label>
+      <select id="type" type="text" class="block rounded text-white font-extrabold bg-blue-300 p-3">
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-3 mx-3">
+    <button id="reset"
+      class="hover:bg-blue-400 shadow rounded text-white font-extrabold bg-blue-300 p-3 m-1">Reset</button>
+  </div>
+
+  <div class="m-3">
+    <button id="first"
+      class="pagination hover:bg-blue-400 shadow rounded text-white font-extrabold bg-blue-300 p-3 m-1">First</button>
+    <button id="prev"
+      class="pagination hover:bg-blue-400 shadow rounded text-white font-extrabold bg-blue-300 p-3 m-1">Prev</button>
+    <button id="next"
+      class="pagination hover:bg-blue-400 shadow rounded text-white font-extrabold bg-blue-300 p-3 m-1">Next</button>
+    <button id="last"
+      class="pagination hover:bg-blue-400 shadow rounded text-white font-extrabold bg-blue-300 p-3 m-1">Last</button>
+  </div>
+
+  <p id="search-info" class="mb-3 mx-3"></p>
+
+  <div id="progress" class="progress mb-3 mx-3 opacity-0"></div>
+
+  <div class="w-full overflow-x-auto px-3 table-container">
+    <table id="result" class="w-max table-auto relative">
+      <thead>
+        <tr>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">My Anime Page</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">MAL_ID</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Name</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Genres</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">English name</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Japanese name</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Type</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Episodes</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Aired</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Premiered</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Producers</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Licensors</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Studios</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Source</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Duration</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Rating</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Ranked</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Popularity</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Members</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Favorites</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Watching</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Completed</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">On-Hold</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Dropped</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Plan to Watch</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-10</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-9</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-8</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-7</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-6</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-5</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-4</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-3</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-2</td>
+          <td class="p-3 sticky top-0 bg-blue-400 text-white font-extrabold">Score-1</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="my-5 flex justify-center">
+    <a href="https://github.com/jefrydco/uncover-vue-3-reactivity-system#readme"
+      class="hover:text-blue-600 hover:underline text-blue-500 font-medium mr-3" target="_blank" rel="noopener noreferrer">Github</a>
+    <a href="https://jefrydco.id/en/blog/create-reactivity-system-vue-3-javascript/"
+      class="hover:text-blue-600 hover:underline text-blue-500 font-medium" target="_blank" rel="noopener noreferrer">Explanation</a>
+  </div>
+
+  <script type="module" src="./scripts/main.js"></script>
+</body>
+
+</html>
